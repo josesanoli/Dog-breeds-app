@@ -25,4 +25,15 @@ class DogBreedsRepositoryImpl  @Inject constructor(private val api: DogAPI) : Do
             emit(ResponseStatus.Error((R.string.error_response)))
         }
     }
+
+    override suspend fun getBreedImage(breedName: String): Flow<ResponseStatus<String>> = flow {
+        try {
+            val imageUrl = api.getBreedImage(breedName).message
+            emit(ResponseStatus.Success(imageUrl))
+        } catch (e: HttpException) {
+            emit(ResponseStatus.Error((R.string.error_response)))
+        } catch (e: IOException) {
+            emit(ResponseStatus.Error((R.string.error_response)))
+        }
+    }
 }

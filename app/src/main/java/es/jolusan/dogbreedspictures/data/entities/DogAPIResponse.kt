@@ -14,7 +14,7 @@ fun DogAPIResponse.toDogBreedsList(): List<DogBreed> {
     val messageList = this.message.toList()
     val dogBreedsList: ArrayList<DogBreed> = arrayListOf()
     messageList.forEach { breed ->
-        val dogBreed = DogBreed(breed.first, breed.second )
+        val dogBreed = DogBreed(breed.first, breed.second)
         dogBreedsList.add(dogBreed)
     }
     return dogBreedsList

@@ -6,4 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface DogBreedsRepository {
     suspend fun getDogBreeds(): Flow<ResponseStatus<List<DogBreed>>>
+    suspend fun getBreedImage(breedName: String): Flow<ResponseStatus<String>>
 }
