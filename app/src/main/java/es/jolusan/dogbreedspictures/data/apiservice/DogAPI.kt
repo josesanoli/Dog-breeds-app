@@ -1,6 +1,7 @@
 package es.jolusan.dogbreedspictures.data.apiservice
 
-import es.jolusan.dogbreedspictures.data.entities.BreedImageAPIResponse
+import es.jolusan.dogbreedspictures.data.entities.BreedImagesAPIResponse
+import es.jolusan.dogbreedspictures.data.entities.BreedRandomImageAPIResponse
 import es.jolusan.dogbreedspictures.data.entities.DogAPIResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -11,7 +12,12 @@ interface DogAPI {
     ): DogAPIResponse
 
     @GET("breed/{breedName}/images/random")
-    suspend fun getBreedImage(
+    suspend fun getBreedRandomImage(
         @Path("breedName") breedName: String
-    ): BreedImageAPIResponse
+    ): BreedRandomImageAPIResponse
+
+    @GET("breed/{breedName}/images")
+    suspend fun getBreedImages(
+        @Path("breedName") breedName: String
+    ): BreedImagesAPIResponse
 }

@@ -9,7 +9,6 @@ import es.jolusan.dogbreedspictures.domain.repositories.DogBreedsRepository
 import es.jolusan.dogbreedspictures.utils.ResponseStatus
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import org.json.JSONObject
 import java.io.IOException
 import javax.inject.Inject
 
@@ -26,10 +25,22 @@ class DogBreedsRepositoryImpl  @Inject constructor(private val api: DogAPI) : Do
         }
     }
 
-    override suspend fun getBreedImage(breedName: String): Flow<ResponseStatus<String>> = flow {
+    override suspend fun getBreedRandomImage(breedName: String): Flow<ResponseStatus<String>> = flow {
         try {
-            val imageUrl = api.getBreedImage(breedName).message
+            val imageUrl = api.getBreedRandomImage(breedName).message
             emit(ResponseStatus.Success(imageUrl))
+        } catch (e: HttpException) {
+            emit(ResponseStatus.Error((R.string.error_response)))
+        } catch (e: IOException) {
+            emit(ResponseStatus.Error((R.string.error_response)))
+        }
+    }
+
+    override suspend fun getBreedImages(breedName: String): Flow<ResponseStatus<List<String>>> = flow {
+        try {
+            emit(ResponseStatus.Loading())
+            val list = api.getBreedImages(breedName).message
+            emit(ResponseStatus.Success(list))
         } catch (e: HttpException) {
             emit(ResponseStatus.Error((R.string.error_response)))
         } catch (e: IOException) {
