@@ -4,15 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import es.jolusan.dogbreedspictures.R
 import es.jolusan.dogbreedspictures.databinding.MainFragmentBinding
 import es.jolusan.dogbreedspictures.domain.model.DogBreed
+import es.jolusan.dogbreedspictures.utils.Constants
 import es.jolusan.dogbreedspictures.utils.ResponseStatus
 import kotlinx.coroutines.launch
 
@@ -43,7 +46,12 @@ class MainFragment : Fragment() {
     }
 
     private fun setupUI() {
-        dogBreedsAdapter = DogBreedsAdapter(viewModel::onBreedClicked)
+        dogBreedsAdapter = DogBreedsAdapter{
+            findNavController().navigate(
+                R.id.action_mainFragment_to_picturesFragment,
+                bundleOf(Constants.PICTURE_BUNDLE_ARGUMENT to it.breedName)
+            )
+        }
         binding.breedsRecyclerView.adapter = dogBreedsAdapter
     }
 

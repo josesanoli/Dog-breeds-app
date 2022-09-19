@@ -39,8 +39,4 @@ class MainViewModel @Inject constructor(
         }
     }
 
-
-    fun onBreedClicked(breed: DogBreed) {
-        val navigation = ""
-    }
 }

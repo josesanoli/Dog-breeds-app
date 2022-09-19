@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="es.jolusan.dogbreedspictures.presentation.main.MainFragment"
+        android:label="@string/main_screen_title"
+        tools:layout="@layout/main_fragment">
+        <action
+            android:id="@+id/action_mainFragment_to_picturesFragment"
+            app:destination="@id/picturesFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/picturesFragment"
+        android:name="es.jolusan.dogbreedspictures.presentation.pictures.PicturesFragment"
+        android:label="@string/breed_pictures_screen_title"
+        tools:layout="@layout/pictures_fragment" />
+</navigation>
