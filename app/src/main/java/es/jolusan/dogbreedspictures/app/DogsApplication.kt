@@ -1,4 +1,8 @@
 package es.jolusan.dogbreedspictures.app
 
-class DogsApplication {
+import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
+
+@HiltAndroidApp
+class DogsApplication: Application() {
 }

@@ -2,9 +2,11 @@ package es.jolusan.dogbreedspictures.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import dagger.hilt.android.AndroidEntryPoint
 import es.jolusan.dogbreedspictures.R
 import es.jolusan.dogbreedspictures.presentation.main.MainFragment
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,10 +1,12 @@
 package es.jolusan.dogbreedspictures.presentation.main
 
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import es.jolusan.dogbreedspictures.domain.model.DogBreed
+import javax.inject.Inject
 
-class MainViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+@HiltViewModel
+class MainViewModel @Inject constructor(): ViewModel() {
 
     fun onBreedClicked(breed: DogBreed) {
 
