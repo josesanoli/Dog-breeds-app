@@ -4,22 +4,23 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import es.jolusan.dogbreedspictures.databinding.DogBreedItemBinding
-import es.jolusan.dogbreedspictures.domain.model.DogBreed
+import es.jolusan.dogbreedspictures.domain.model.DogBreedItem
+import es.jolusan.dogbreedspictures.utils.loadUrl
 
 class DogBreedsAdapter(
-    private val listener: (DogBreed) -> Unit
+    private val listener: (DogBreedItem) -> Unit
 ) : RecyclerView.Adapter<DogBreedsAdapter.BreedViewHolder>(){
 
-    var breedsList: List<DogBreed> = listOf()
+    var breedsList: List<DogBreedItem> = listOf()
 
     inner class BreedViewHolder(
         private val binding: DogBreedItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(breed: DogBreed) = with(binding) {
-            breedName.text = breed.breedName
-            subbreeds.text = breed.subBreeds.joinToString(", ") { it }
-            //breedImage.loadUrl(breed.imageURL)
+        fun bind(breed: DogBreedItem) = with(binding) {
+            breedName.text = breed.breedName.replaceFirstChar { it.uppercase() }
+            subbreeds.text = breed.subBreeds.replaceFirstChar { it.uppercase() }
+            breedImage.loadUrl(breed.imageURL)
         }
     }
 

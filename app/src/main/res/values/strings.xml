@@ -8,4 +8,7 @@
     <!-- Breed pictures Screen -->
     <string name="breed_pictures_screen_title">Dog breed pictures</string>
 
+    <!-- Error messages -->
+    <string name="error_response">Could not get dog breeds now</string>
+
 </resources>
