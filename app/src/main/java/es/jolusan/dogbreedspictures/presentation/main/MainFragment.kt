@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import es.jolusan.dogbreedspictures.R
+import es.jolusan.dogbreedspictures.databinding.MainFragmentBinding
 
 class MainFragment : Fragment() {
 
@@ -15,18 +16,30 @@ class MainFragment : Fragment() {
     }
 
     private lateinit var viewModel: MainViewModel
+    private lateinit var binding: MainFragmentBinding
+    private lateinit var dogBreedsAdapter: DogBreedsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.main_fragment, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+        binding = MainFragmentBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        // TODO: Use the ViewModel
+        return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupUI()
+        setupObserver()
+    }
+
+    private fun setupUI() {
+        dogBreedsAdapter = DogBreedsAdapter(viewModel::onBreedClicked)
+        binding.breedsRecyclerView.adapter = dogBreedsAdapter
+    }
+
+    private fun setupObserver() {
+
+    }
 }

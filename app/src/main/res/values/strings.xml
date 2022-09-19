@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Dog Breeds Pictures</string>
+
+    <!-- Main Screen -->
+    <string name="main_screen_title">Dog Breeds App</string>
+    <string name="main_screen_info_text">This is the dog breeds list</string>
+
+    <!-- Breed pictures Screen -->
+    <string name="breed_pictures_screen_title">Dog breed pictures</string>
+
 </resources>
