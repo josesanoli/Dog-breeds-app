@@ -1,8 +1,9 @@
-package es.jolusan.dogbreedspictures
+package es.jolusan.dogbreedspictures.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import es.jolusan.dogbreedspictures.ui.main.MainFragment
+import es.jolusan.dogbreedspictures.R
+import es.jolusan.dogbreedspictures.presentation.main.MainFragment
 
 class MainActivity : AppCompatActivity() {
 

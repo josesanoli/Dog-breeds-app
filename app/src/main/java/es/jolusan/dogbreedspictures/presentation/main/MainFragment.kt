@@ -1,4 +1,4 @@
-package es.jolusan.dogbreedspictures.ui.main
+package es.jolusan.dogbreedspictures.presentation.main
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
