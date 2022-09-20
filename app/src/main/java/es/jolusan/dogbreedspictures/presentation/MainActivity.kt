@@ -1,14 +1,13 @@
 package es.jolusan.dogbreedspictures.presentation
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import es.jolusan.dogbreedspictures.R
 import es.jolusan.dogbreedspictures.databinding.MainActivityBinding
-import es.jolusan.dogbreedspictures.presentation.main.MainFragment
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {

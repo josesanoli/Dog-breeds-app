@@ -1,14 +1,22 @@
 package es.jolusan.dogbreedspictures.data.di
 
+import android.content.Context
+import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import es.jolusan.dogbreedspictures.BuildConfig
+import es.jolusan.dogbreedspictures.app.AppDatabase
 import es.jolusan.dogbreedspictures.data.apiservice.DogAPI
+import es.jolusan.dogbreedspictures.data.database.DogBreedsDao
 import es.jolusan.dogbreedspictures.data.repo.DogBreedsRepositoryImpl
+import es.jolusan.dogbreedspictures.data.repo.LocalBreedsRepositoryImpl
 import es.jolusan.dogbreedspictures.domain.repositories.DogBreedsRepository
+import es.jolusan.dogbreedspictures.domain.repositories.LocalBreedsRepository
 import es.jolusan.dogbreedspictures.utils.Constants
+import es.jolusan.dogbreedspictures.utils.Converter
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -20,6 +28,9 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
+    private val converter: Converter = Converter()
+
     @Singleton
     @Provides
     fun provideHttpClient(): OkHttpClient {
@@ -59,6 +70,29 @@ object AppModule {
             .client(okHttpClient)
             .build()
             .create(DogAPI::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideLocalBreedsRepository(localDB: DogBreedsDao): LocalBreedsRepository {
+        return LocalBreedsRepositoryImpl(localDB)
+    }
+
+    @Provides
+    fun provideDogBreedsDao(appDatabase: AppDatabase): DogBreedsDao {
+        return appDatabase.dogBreedsDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideAppDatabase(@ApplicationContext appContext: Context): AppDatabase {
+        return Room.databaseBuilder(
+            appContext,
+            AppDatabase::class.java,
+            "dog_breeds_database"
+        )
+            .addTypeConverter(converter)
+            .build()
     }
 
 }

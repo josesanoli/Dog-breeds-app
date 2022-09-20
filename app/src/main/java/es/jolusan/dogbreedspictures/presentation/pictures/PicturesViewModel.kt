@@ -3,9 +3,7 @@ package es.jolusan.dogbreedspictures.presentation.pictures
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import es.jolusan.dogbreedspictures.domain.model.DogBreed
 import es.jolusan.dogbreedspictures.domain.usecases.GetBreedImagesUseCase
-import es.jolusan.dogbreedspictures.domain.usecases.GetBreedsUseCase
 import es.jolusan.dogbreedspictures.utils.ResponseStatus
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow

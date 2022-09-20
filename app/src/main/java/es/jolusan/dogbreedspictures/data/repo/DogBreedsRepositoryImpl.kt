@@ -12,7 +12,9 @@ import kotlinx.coroutines.flow.flow
 import java.io.IOException
 import javax.inject.Inject
 
-class DogBreedsRepositoryImpl  @Inject constructor(private val api: DogAPI) : DogBreedsRepository {
+class DogBreedsRepositoryImpl  @Inject constructor(
+    private val api: DogAPI
+    ) : DogBreedsRepository {
     override suspend fun getDogBreeds(): Flow<ResponseStatus<List<DogBreed>>> = flow {
         try {
             emit(ResponseStatus.Loading())
