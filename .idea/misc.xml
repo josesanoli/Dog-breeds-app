@@ -6,6 +6,7 @@
         <entry key="app/src/main/res/layout/dog_breed_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/main_activity.xml" value="0.1636271529888551" />
         <entry key="app/src/main/res/layout/main_fragment.xml" value="0.1636271529888551" />
+        <entry key="app/src/main/res/layout/pager_picture_fragment.xml" value="0.1" />
         <entry key="app/src/main/res/layout/pictures_fragment.xml" value="0.1" />
       </map>
     </option>

@@ -18,8 +18,10 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class PicturesFragment : Fragment() {
-    private lateinit var binding: PicturesFragmentBinding
+
     private val viewModel: PicturesViewModel by viewModels()
+    private lateinit var binding: PicturesFragmentBinding
+    private lateinit var breedPicturesAdapter: PicturesAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,9 +34,15 @@ class PicturesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         arguments?.getString(Constants.PICTURE_BUNDLE_ARGUMENT)?.let {
-            viewModel.getBreedImages(it)
+            getBreedPictures(it)
         }
+        setupUI()
         setupObservers()
+    }
+
+    private fun setupUI() {
+        breedPicturesAdapter = PicturesAdapter(this)
+        binding.breedPicturesPager.adapter = breedPicturesAdapter
     }
 
     private fun setupObservers() {
@@ -44,22 +52,36 @@ class PicturesFragment : Fragment() {
                     when (it) {
                         is ResponseStatus.Success -> {
                             binding.progressBar.visibility = View.GONE
-                           // it.data?.let { breedsList -> updateBreedsList(breedsList) }
-                           // binding.breedsRecyclerView.visibility = View.VISIBLE
+                            it.data?.let { breedsList -> updatePicturesPager(breedsList) }
+                            binding.breedPicturesPager.visibility = View.VISIBLE
                         }
                         is ResponseStatus.Loading -> {
                             binding.progressBar.visibility = View.VISIBLE
-                           // binding.breedsRecyclerView.visibility = View.GONE
+                            binding.breedPicturesPager.visibility = View.GONE
                         }
                         is ResponseStatus.Error -> {
                             binding.progressBar.visibility = View.GONE
-                          //  binding.infoTextView.visibility = View.VISIBLE
-                          //  binding.infoTextView.text = it.messageResource?.let { resource -> getString(resource) } ?: getString(
-                          //      R.string.error_response)
+                            binding.picturesInfoTextView.visibility = View.VISIBLE
+                            binding.picturesInfoTextView.text = getString(R.string.error_response)
                         }
                     }
                 }
             }
         }
     }
+
+    private fun getBreedPictures(breedName: String) {
+        viewModel.getBreedImages(breedName)
+    }
+
+    private fun updatePicturesPager (picturesList: List<String>) {
+        if (picturesList.isEmpty()){
+            binding.picturesInfoTextView.visibility = View.VISIBLE
+            binding.picturesInfoTextView.text = getString(R.string.error_response)
+            binding.breedPicturesPager.visibility = View.GONE
+        } else {
+            breedPicturesAdapter.breedUrlPictures = picturesList
+        }
+    }
+
 }
