@@ -12,8 +12,10 @@ import androidx.lifecycle.repeatOnLifecycle
 import dagger.hilt.android.AndroidEntryPoint
 import es.jolusan.dogbreedspictures.R
 import es.jolusan.dogbreedspictures.databinding.PicturesFragmentBinding
+import es.jolusan.dogbreedspictures.presentation.MainActivity
 import es.jolusan.dogbreedspictures.utils.Constants
 import es.jolusan.dogbreedspictures.utils.ResponseStatus
+import es.jolusan.dogbreedspictures.utils.upperCaseFirst
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -35,6 +37,8 @@ class PicturesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         arguments?.getString(Constants.PICTURE_BUNDLE_ARGUMENT)?.let {
             getBreedPictures(it)
+            (activity as? MainActivity)?.setToolbarTitle(it.upperCaseFirst())
+            binding.picturesInfoTextView.text = getString(R.string.pictures_screen_info_text, it)
         }
         setupUI()
         setupObservers()

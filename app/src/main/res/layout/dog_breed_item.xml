@@ -40,6 +40,8 @@
         android:layout_gravity="center"
         android:layout_marginTop="8dp"
         android:textSize="16sp"
+        android:maxLines="2"
+        android:ellipsize="end"
         tools:text="@string/main_screen_title"
         app:layout_constraintStart_toStartOf="@id/breed_name"
         app:layout_constraintTop_toTopOf="@id/breed_name"

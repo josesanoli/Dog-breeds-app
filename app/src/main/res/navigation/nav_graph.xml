@@ -18,6 +18,5 @@
     <fragment
         android:id="@+id/picturesFragment"
         android:name="es.jolusan.dogbreedspictures.presentation.pictures.PicturesFragment"
-        android:label="@string/breed_pictures_screen_title"
         tools:layout="@layout/pictures_fragment" />
 </navigation>

@@ -12,10 +12,12 @@ import es.jolusan.dogbreedspictures.databinding.MainActivityBinding
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
+    lateinit var binding: MainActivityBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding: MainActivityBinding = MainActivityBinding.inflate(layoutInflater)
+        binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val navHostFragment =
@@ -24,5 +26,9 @@ class MainActivity : AppCompatActivity() {
 
         val appBarConfiguration = AppBarConfiguration(navController.graph)
         binding.toolbar.setupWithNavController(navController, appBarConfiguration)
+    }
+
+    fun setToolbarTitle (title: String) {
+        binding.toolbar.title = title
     }
 }

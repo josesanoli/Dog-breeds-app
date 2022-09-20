@@ -7,7 +7,8 @@
 
     <!-- Breed pictures Screen -->
     <string name="breed_pictures_screen_title">Dog breed pictures</string>
-    <string name="pictures_screen_info_text">Some breed examples</string>
+    <string name="pictures">pictures</string>
+    <string name="pictures_screen_info_text">Some %1$s examples</string>
 
     <!-- Error messages -->
     <string name="error_response">Could not get dog breeds now</string>

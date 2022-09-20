@@ -11,3 +11,7 @@ fun ImageView.loadUrl(url: String) {
         .error(ColorDrawable(Color.GRAY))
         .into(this)
 }
+
+fun String.upperCaseFirst() : String {
+    return replaceFirstChar { it.uppercase() }
+}

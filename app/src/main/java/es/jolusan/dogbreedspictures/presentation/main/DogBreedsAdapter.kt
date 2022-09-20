@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import es.jolusan.dogbreedspictures.databinding.DogBreedItemBinding
 import es.jolusan.dogbreedspictures.domain.model.DogBreed
 import es.jolusan.dogbreedspictures.utils.loadUrl
+import es.jolusan.dogbreedspictures.utils.upperCaseFirst
 
 class DogBreedsAdapter(
     private val listener: (DogBreed) -> Unit
@@ -19,11 +20,11 @@ class DogBreedsAdapter(
 
         fun bind(breed: DogBreed) = with(binding) {
             breedName.text = breed.breedName
-                .replaceFirstChar { it.uppercase() }
+                .upperCaseFirst()
 
             subbreeds.text = breed.subBreeds
                 .joinToString(", ") { it }
-                .replaceFirstChar { it.uppercase() }
+                .upperCaseFirst()
 
             breedImage
                 .loadUrl(breed.imageURL)
