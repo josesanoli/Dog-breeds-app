@@ -3,12 +3,10 @@
 
     <!-- Main Screen -->
     <string name="main_screen_title">Dog Breeds App</string>
-    <string name="main_screen_info_text">This is the dog breeds list</string>
+    <string name="main_screen_info_text">List of dog breeds:</string>
 
     <!-- Breed pictures Screen -->
-    <string name="breed_pictures_screen_title">Dog breed pictures</string>
-    <string name="pictures">pictures</string>
-    <string name="pictures_screen_info_text">Some %1$s examples</string>
+    <string name="pictures_screen_info_text">Some %1$s pictures:</string>
 
     <!-- Error messages -->
     <string name="error_response">Could not get dog breeds now</string>
