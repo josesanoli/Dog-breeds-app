@@ -8,6 +8,7 @@ import es.jolusan.dogbreedspictures.domain.usecases.GetBreedRandomImageUseCase
 import es.jolusan.dogbreedspictures.domain.usecases.GetBreedsUseCase
 import es.jolusan.dogbreedspictures.domain.usecases.GetLocalBreedsUseCase
 import es.jolusan.dogbreedspictures.domain.usecases.InsertLocalBreedsUseCase
+import es.jolusan.dogbreedspictures.utils.Constants.EMPTY_STRING
 import es.jolusan.dogbreedspictures.utils.ResponseStatus
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -26,6 +27,9 @@ class MainViewModel @Inject constructor(
     private val _dogBreed = MutableStateFlow<ResponseStatus<List<DogBreed>>>(ResponseStatus.Loading())
     val dogBreed = _dogBreed.asStateFlow()
 
+    private val _dogBreedUrl = MutableStateFlow(Pair(EMPTY_STRING,EMPTY_STRING))
+    val dogBreedUrl = _dogBreedUrl.asStateFlow()
+
     fun getDogBreeds() {
         if (_dogBreed.value.data.isNullOrEmpty()) {
             viewModelScope.launch(Dispatchers.IO) {
@@ -34,11 +38,7 @@ class MainViewModel @Inject constructor(
                         is ResponseStatus.Success -> {
                             responseStatus.data?.let { data ->
                                 insertLocalBreedsUseCase(data)
-                                data.forEach { breed ->
-                                    getBreedRandomImageUseCase(breed.breedName).collect { responseImage ->
-                                        breed.imageURL = responseImage.data ?: ""
-                                    }
-                                }
+                                getRandomImage(data)
                                 _dogBreed.value = responseStatus
                             } ?: getLocalBreeds()
                         }
@@ -49,6 +49,16 @@ class MainViewModel @Inject constructor(
                             _dogBreed.value = responseStatus
                         }
                     }
+                }
+            }
+        }
+    }
+
+    private fun getRandomImage(breedsList: List<DogBreed>) {
+        viewModelScope.launch(Dispatchers.IO) {
+            breedsList.forEach { breed ->
+                getBreedRandomImageUseCase(breed.breedName).collect { responseImage ->
+                    _dogBreedUrl.value = Pair(breed.breedName, responseImage.data ?: EMPTY_STRING)
                 }
             }
         }

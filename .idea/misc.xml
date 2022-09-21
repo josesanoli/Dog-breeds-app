@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.22962962962962963" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3296875" />
         <entry key="app/src/main/res/layout/dog_breed_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/main_activity.xml" value="0.1636271529888551" />
         <entry key="app/src/main/res/layout/main_fragment.xml" value="0.1636271529888551" />

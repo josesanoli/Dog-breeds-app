@@ -6,4 +6,6 @@ object Constants {
 
     const val PICTURE_BUNDLE_ARGUMENT = "PICTURE_BUNDLE_ARGUMENT"
     const val PAGER_ARGUMENT = "PAGER_ARGUMENT"
+
+    const val EMPTY_STRING = ""
 }

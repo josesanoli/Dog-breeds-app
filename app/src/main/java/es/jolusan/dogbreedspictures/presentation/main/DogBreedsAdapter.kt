@@ -12,7 +12,7 @@ class DogBreedsAdapter(
     private val listener: (DogBreed) -> Unit
 ) : RecyclerView.Adapter<DogBreedsAdapter.BreedViewHolder>(){
 
-    var breedsList: List<DogBreed> = listOf()
+    var breedsList: MutableList<DogBreed> = mutableListOf()
 
     inner class BreedViewHolder(
         private val binding: DogBreedItemBinding
@@ -42,5 +42,13 @@ class DogBreedsAdapter(
         val breed = breedsList[position]
         bind(breed)
         itemView.setOnClickListener { listener(breed) }
+    }
+
+    fun updateAdapterList (breed: String, imageUrl: String) {
+        if (breedsList.isNotEmpty()) {
+            breedsList.find { it.breedName == breed}?.imageURL = imageUrl
+            val index = breedsList.indexOfFirst { it.breedName == breed }
+            notifyItemChanged(index)
+        }
     }
 }

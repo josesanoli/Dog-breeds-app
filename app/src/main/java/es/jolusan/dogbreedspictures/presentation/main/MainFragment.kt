@@ -78,6 +78,13 @@ class MainFragment : Fragment() {
                 }
             }
         }
+        lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.dogBreedUrl.collect {
+                    updateAdapterList(it.first, it.second)
+                }
+            }
+        }
     }
 
     private fun getDogBreeds() {
@@ -90,7 +97,11 @@ class MainFragment : Fragment() {
             binding.infoTextView.text = getString(R.string.error_response)
             binding.breedsRecyclerView.visibility = View.GONE
         } else {
-            dogBreedsAdapter.breedsList = breedsList
+            dogBreedsAdapter.breedsList = breedsList.toMutableList()
         }
+    }
+
+    private fun updateAdapterList (breed: String, imageUrl: String) {
+        dogBreedsAdapter.updateAdapterList(breed, imageUrl)
     }
 }
